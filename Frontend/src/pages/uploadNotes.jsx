@@ -25,6 +25,38 @@ function UploadNotes() {
 
     }
 
+    function saveNote(){
+
+        if(image !== "" || image != null){
+
+            fetch("http://localhost:8080/upload-image",{
+
+                method:"POST",
+                headers:{
+
+                    "Content-Type": "application/json"
+
+                },
+                body:JSON.stringify({
+
+                    userID: currentUserID,
+                    subjectID: subjectID,
+                    noteTitle: noteTitle,
+                    description: description,
+                    image: base64Image
+
+                })
+
+            }).then(response => response.text()).then(data =>{
+
+                console.log(data)
+
+            })
+
+        }
+
+    }
+
     return (
         <div className="bg-gradient-to-r from-sky-100 to bg-sky-50  w-screen min-h-screen   flex  flex-row bg-neutral-100">
             <Header active={"Resources"} />
@@ -161,7 +193,7 @@ function UploadNotes() {
                             gap-5 
                         
                         ">
-                        <button className=" 
+                        <button onClick={saveNote} className=" 
                             
                                 bg-sky-200 
                                 rounded-xl 

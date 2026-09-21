@@ -146,6 +146,78 @@ public class PortalServer {
     }
 });
 
+        server.createContext("/upload-image", exchange -> {
+
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "POST, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+
+            if (exchange.getRequestMethod().equals("OPTIONS")) {
+
+                exchange.sendResponseHeaders(204, -1);
+                exchange.close();
+
+            } else if (exchange.getRequestMethod().equals("POST")) {
+
+                java.io.InputStream inputStream = exchange.getRequestBody();
+
+                String requestBody = new String(inputStream.readAllBytes());
+
+                System.out.println("got your image upload request:");
+                System.out.println(requestBody);
+
+                long userID = Long.parseLong(
+                        requestBody
+                                .split("\"userID\":")[1]
+                                .split(",")[0]
+                );
+
+                long subjectID = Long.parseLong(
+                        requestBody
+                                .split("\"subjectID\":")[1]
+                                .split(",")[0]
+                );
+
+                String noteTitle = requestBody
+                        .split("\"noteTitle\":\"")[1]
+                        .split("\"")[0];
+
+                String description = requestBody
+                        .split("\"description\":\"")[1]
+                        .split("\"")[0];
+
+                String imageBase64 = requestBody
+                        .split("\"image\":\"")[1]
+                        .split("\"")[0];
+
+                byte[] imageData = java.util.Base64.getDecoder().decode(imageBase64);
+
+                String response = Images.SaveImage(
+                        userID,
+                        noteTitle,
+                        subjectID,
+                        description,
+                        imageData
+                );
+
+                exchange.sendResponseHeaders(200, response.length());
+
+                exchange.getResponseBody().write(response.getBytes());
+
+                exchange.getResponseBody().close();
+
+            } else {
+
+                String response = "Only POST requests are allowed";
+
+                exchange.sendResponseHeaders(405, response.length());
+
+                exchange.getResponseBody().write(response.getBytes());
+
+                exchange.getResponseBody().close();
+            }
+        });
+
         server.start();
 
         System.out.println("Student Portal Backend running on port 8080");
