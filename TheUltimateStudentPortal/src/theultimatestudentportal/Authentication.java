@@ -38,32 +38,33 @@ public class Authentication {
 
         String checkUsername = "SELECT * FROM student WHERE Username = ?";
 
-        try (Connection connection = DatabaseConnection.connect();
-             PreparedStatement statement = connection.prepareStatement(checkUsername)) {
+        try {
+
+            Connection connection = DatabaseConnection.connect();
+
+            PreparedStatement statement = connection.prepareStatement(checkUsername);
 
             statement.setString(1, enteredUsername);
 
             try (ResultSet userRecord = statement.executeQuery()) {
 
-                
                 if (!userRecord.next()) {
                     return "Username not found";
                 }
 
                 long currentUserID = userRecord.getLong("studentid");
-                
+
                 String storedPasswordHash = userRecord.getString("passwordhash");
-                
+
                 String passwordSalt = userRecord.getString("passwordsalt");
-                
+
                 int attempts = userRecord.getInt("failedattempts");
-                
+
                 boolean accountActive = userRecord.getBoolean("accountactive");
-                
+
                 Timestamp blockedUntil = userRecord.getTimestamp("blockeduntil");
                 Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
-                
                 if (!accountActive) {
                     return "This account is not active";
                 }
@@ -72,7 +73,6 @@ public class Authentication {
                     return "This account is temporarily blocked. Try again later.";
                 }
 
-                
                 if (blockedUntil != null && currentTime.after(blockedUntil)) {
                     attempts = 0;
                     String resetBlock = "UPDATE student SET failedattempts = 0, blockeduntil = NULL WHERE studentid = ?";
@@ -82,11 +82,10 @@ public class Authentication {
                     }
                 }
 
-                
                 String hashedPassword = hashPassword(enteredPassword, passwordSalt);
 
                 if (hashedPassword.equals(storedPasswordHash)) {
-                    
+
                     String updateLogin = "UPDATE student SET lastlogin = CURRENT_TIMESTAMP, failedattempts = 0, blockeduntil = NULL WHERE studentid = ?";
                     try (PreparedStatement updateStatement = connection.prepareStatement(updateLogin)) {
                         updateStatement.setLong(1, currentUserID);
@@ -96,7 +95,7 @@ public class Authentication {
                 } else {
                     attempts++;
 
-                    if (attempts >= 5) { 
+                    if (attempts >= 5) {
                         Timestamp newBlockedUntil = new Timestamp(System.currentTimeMillis() + 180000);
                         String blockAccount = "UPDATE student SET failedattempts = ?, blockeduntil = ? WHERE studentid = ?";
                         try (PreparedStatement blockStatement = connection.prepareStatement(blockAccount)) {
@@ -122,7 +121,6 @@ public class Authentication {
             return "Database error";
         }
     }
-  
 
     public static String generateSalt() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvwxyz";
@@ -625,70 +623,6 @@ public class Authentication {
                 }
             }
         }
-        return false;
-    }
-
-    public static boolean LoginFromWeb(String username, String password) {
-
-        System.out.println("Username received: " + username);
-        System.out.println("Password received");
-
-        Connection connection = DatabaseConnection.connect();
-
-        if (connection == null) {
-            System.out.println("Database connection failed");
-            return false;
-        }
-
-        String sql = "SELECT passwordhash, passwordsalt FROM student WHERE username = ?";
-
-        try {
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-
-            statement.setString(1, username);
-
-            ResultSet result = statement.executeQuery();
-
-            if (result.next()) {
-
-                System.out.println("Username found in database");
-
-                String storedHash = result.getString("passwordhash");
-                String salt = result.getString("passwordsalt");
-
-                String enteredHash = hashPassword(password, salt);
-
-                if (enteredHash.equals(storedHash)) {
-
-                    System.out.println("Password correct");
-
-                    result.close();
-                    statement.close();
-                    connection.close();
-
-                    return true;
-
-                } else {
-
-                    System.out.println("Password incorrect");
-                }
-
-            } else {
-
-                System.out.println("Username not found");
-            }
-
-            result.close();
-            statement.close();
-            connection.close();
-
-        } catch (SQLException error) {
-
-            System.out.println("Database error");
-            System.out.println(error.getMessage());
-        }
-
         return false;
     }
 }

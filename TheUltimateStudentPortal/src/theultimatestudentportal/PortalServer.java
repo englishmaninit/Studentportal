@@ -46,18 +46,18 @@ public class PortalServer {
                 .split("\"password\":\"")[1]
                 .split("\"")[0];
 
-        boolean loginSuccessful =
-                Authentication.LoginFromWeb(username, password);
+        String loginSuccessful = Authentication.Login(username, password);
+                
 
         String response;
 
-        if (loginSuccessful) {
+        if (loginSuccessful == null) {
 
-            response = "Login successful";
+            response = "Incorrect username or password";
 
         } else {
 
-            response = "Incorrect username or password";
+            response = "Login successfull";
         }
 
         exchange.sendResponseHeaders(200, response.length());

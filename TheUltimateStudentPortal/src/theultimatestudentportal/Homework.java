@@ -20,7 +20,7 @@ import static theultimatestudentportal.Alert.AddAlert;
  */
 public class Homework {
     
-    public void AddHomework (long currentUserID){
+    public static String AddHomework (long currentUserID, String subject, String description,String homeworkTitle, String date){
         Scanner scanner=new Scanner(System.in);
         
         boolean titleValid = false;
@@ -28,31 +28,22 @@ public class Homework {
         boolean dateValid = false;
         long subjectID = 0;
         LocalDate dueDate = null;
-        String homeworkTitle="";
+      
         
         try{
             Connection connection = DatabaseConnection.connect();
-        
-        while(titleValid == false){
-            System.out.println("Enter homework title");
-            homeworkTitle=scanner.nextLine().trim();
   
             if("".equals(homeworkTitle)){
-                System.out.println("Title cannot be empty");
+                return "Title cannot be empty";
             }else{
                 titleValid = true;
             }
-        }
-        
-        while(subjectValid == false){
-            System.out.println("Enter the subject");
-            String subject=scanner.nextLine();
             
             if("".equals(subject)){
-                System.out.println("Enter the subject");
+                return "Enter the subject";
                 
             }else {
-                String findSubject = "SELECT subjectid FROM subject" + "WHERE studentid = ?"+" AND LOWER(subjectname) = Lower(?)";
+                String findSubject = "SELECT subjectid FROM subject WHERE studentid = ? AND LOWER(subjectname) = Lower(?)";
                 
                 PreparedStatement subjectStatement=connection.prepareStatement(findSubject);
                 
@@ -71,35 +62,22 @@ public class Homework {
                 subjectRecord.close();
                 subjectStatement.close();
             }
+        try {
+          dueDate = LocalDate.parse(date);
+
+        if (dueDate.isBefore(LocalDate.now())) {
+           return "Please enter a valid date";
         }
-        
-        while(dateValid == false){
-            System.out.println("Enter the due date (YYYY-MM-DD):");
-            String enteredDate=scanner.nextLine();
-            
-            try{
-                
-            dueDate=LocalDate.parse(enteredDate);
-            
-            if(dueDate.isBefore(LocalDate.now())){
-                System.out.println("Please enter a valid date");   
-            }else{
-                dateValid = true;
-            }
-        }catch(DateTimeParseException e){
-            System.out.println("Please enter a valid date");
+
+        } catch (DateTimeParseException e) {
+         return "Please enter a valid date";
         }
-            
-        }
-        
-        System.out.println("Enter homework description");
-        String description = scanner.nextLine().trim();
-        
+           
         if("".equals(description)){
-            System.out.println("No description entered");
+           return "No description entered";
         }
         
-        String checkDuplicate="SELECT homeworkid FROM homework" + " WHERE studentid = ? AND duedate = ? AND completed = FALSE";
+        String checkDuplicate="SELECT homeworkid FROM homework WHERE studentid = ? AND duedate = ? AND completed = FALSE";
         
         PreparedStatement duplicateStatement = connection.prepareStatement(checkDuplicate);
         
@@ -111,7 +89,7 @@ public class Homework {
         
         
         if(duplicateHomework.next()){
-            System.out.println("Homework has already been created");
+            return "Homework has already been created";
         }else{
             String addHomework = "INSERT INTO homework" + "(studentid, subjectid, title, description,duedate, completed , datecreated)"+"VALUES(?,?,?,?,? ,FALSE,CURRENT_TIMESTAMP)" +"RETURNING homeworkid";
             
@@ -127,29 +105,25 @@ public class Homework {
             
             if(savedHomework.next()){
                 long homeworkID=savedHomework.getLong("homeworkid");
-                System.out.println("Homework added successfully");
-            
-            
-            long daysRemaining = ChronoUnit.DAYS.between(LocalDate.now(),dueDate);
+                
+            long daysRemaining = ChronoUnit.DAYS.between(LocalDate.now(), dueDate);
 
             if(daysRemaining <=3){
                 AddAlert(currentUserID,homeworkID,"Homework deadline is approaching" +homeworkTitle,2);
             }
         }else{
-                System.out.println("Homework could not be saved");
+                return "Homework could not be saved";
             }
             savedHomework.close();
             homeworkStatement.close();
         } 
         
-        duplicateHomework.close();
-        duplicateStatement.close();
-        connection.close();
-        }catch(SQLException e){
-            System.out.println("Database error");
-            System.out.println(e.getMessage());
-        }
+        return "Homework added successfully";
         
+        }catch(SQLException e){
+            return "Database error";
+        }
+    
     }
     
     public static void GenerateHomeworkAlert(long currentUserID){
@@ -157,7 +131,7 @@ public class Homework {
         try{
             Connection connection = DatabaseConnection.connect();
             
-            String getHomework= "SELECT homeworkid, title, duedate FROM homework"+ "WHERE stidentid = ? AND completed = FALSE";
+            String getHomework= "SELECT homeworkid, title, duedate FROM homework WHERE stidentid = ? AND completed = FALSE";
             
             PreparedStatement  homeworkStatement=connection.prepareStatement(getHomework);
             
@@ -171,7 +145,7 @@ public class Homework {
                 
                  boolean alertAlreadyExists= false;
                  
-                 String checkAlert="SELECT slertid FROM alert"+"WHERE studentid = ? AND homeworkid = ? AND readstatus = FALSE";
+                 String checkAlert="SELECT slertid FROM alert WHERE studentid = ? AND homeworkid = ? AND readstatus = FALSE";
                  
                  PreparedStatement alertStatement =connection.prepareStatement(checkAlert);
                  
@@ -228,57 +202,12 @@ public class Homework {
         }
     }
     
-    public void DisplayHomework(long currentUserID){
-        String findHomework="SELECT homeworkid, title, description, duedate, comepleted" + "FROM homework" + "WHERE studentid = ? "+ "ORDER BY duedate";
+    public static String DeleteHomework(long currentUserID, long homeworkID){
         
         try{
             Connection connection = DatabaseConnection.connect();
             
-            PreparedStatement statement=connection.prepareStatement(findHomework);
-            statement.setLong(1,currentUserID);
-            
-            ResultSet result = statement.executeQuery();
-            
-            
-            
-            boolean found = false;
-            
-            while(result.next()){
-                found = true;
-                
-                long homeworkID = result.getLong("homeworkid");
-                String title = result.getString("title");
-                String description = result.getString("description");
-                LocalDate dueDate = result.getDate("duedate").toLocalDate();
-                boolean completed=result.getBoolean("completed");
-                
-                System.out.println("Homework ID"+homeworkID);
-                System.out.println("Title" + title);
-                System.out.println("Description" + description);
-                System.out.println("Due Date" + dueDate);
-                System.out.println("Completed " + completed);
-                        
-            }
-            
-            if(!found){
-                System.out.println("No homework found");
-            }
-            result.close();
-            statement.close();
-            connection.close();
-                    
-    }catch(SQLException e){
-            System.out.println("Database error");
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void DeleteHomework(long currentUserID, long homeworkID){
-        
-        try{
-            Connection connection = DatabaseConnection.connect();
-            
-            String deleteHomework= "DELETE homeworkid FROM homework" + "WHERE homeworkid = ? AND studentid = ?";
+            String deleteHomework= "DELETE homeworkid FROM homework WHERE homeworkid = ? AND studentid = ?";
             
             PreparedStatement statement=connection.prepareStatement(deleteHomework);
             
@@ -288,21 +217,17 @@ public class Homework {
             int rowsDeleted = statement.executeUpdate();
             
             if(rowsDeleted > 0){
-                System.out.println("Homework deleted successfully");
+                return "Homework deleted successfully";
             }else{
-                System.out.println("Homework not found");
+                return "Homework not found";
             }
-            
-            statement.close();
-            connection.close();
-            
+              
         }catch(SQLException e){
-            System.out.println("Database error");
-            System.out.println(e.getMessage());
+            return "Database error";
         }
     }
     
-    public void UpdateHomework(long currentUserID, long homeworkID){
+    public static String UpdateHomework(long currentUserID, long homeworkID){
          
         try{
             Connection connection = DatabaseConnection.connect();
@@ -311,8 +236,8 @@ public class Homework {
             
             connection.close();
         }catch(SQLException e){
-            System.out.println("Database error");
-            System.out.println(e.getMessage());
+            return "Database error";
         }
+        return "Homework updates successfully";
     }
 }
