@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "../components/header"
 import { useRef, useState } from "react";
 
@@ -138,6 +139,8 @@ function UploadNotes() {
                                 text-[2vh] 
                                 font-semibold 
                                 self-start
+
+                                xl:pt-0
                             
                             ">Notes</p>
                         <div className="
@@ -280,6 +283,7 @@ function UploadNotes() {
                             pl-5 
                             items-center 
                             gap-5 
+                            xl:mb-5
                         
                         ">
                         <button onClick={saveNote} className=" 
@@ -291,11 +295,12 @@ function UploadNotes() {
                                 font-semibold 
                                 hover:shadow-md 
                                 active:shadow-none 
+                                xl:h-10
                             
                             ">
                             Upload
                         </button>
-                        <button className=" 
+                        <Link to={"/notes"} className=" 
                             
                                 bg-sky-200 
                                 rounded-xl 
@@ -304,10 +309,13 @@ function UploadNotes() {
                                 font-semibold 
                                 hover:shadow-md 
                                 active:shadow-none 
-                            
+                                xl:h-10
+                                flex
+                                items-center
+                                justify-center
                             ">
                             Back
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

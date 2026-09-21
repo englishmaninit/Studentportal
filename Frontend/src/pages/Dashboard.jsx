@@ -43,10 +43,13 @@ function Dashboard() {
         
                 w-[130vh]
                 h-[90vh]
-                ml-50
+                2xl:ml-50
                 mt-10          
                 flex
-                flex-col          
+                flex-col    
+                
+                xl:ml-20
+          
                 
             
             ">
@@ -70,7 +73,9 @@ function Dashboard() {
                             
                                 text-blue-400
                                 font-semibold   
-                                text-[1.5vh]
+                                2xl:text-[1.5vh]
+
+                                xl:text-[2vh]
                             
                             ">Student dashboard</p>
                             <p className="
@@ -105,11 +110,13 @@ function Dashboard() {
                             <p className="
                             
                                 font-semibold
+                                xl:text-[2vh]
 
                             ">Ready for Period 3</p>
                             <p className="
                             
                                 text-neutral-400
+                                xl:text-[2vh]
                             
                             ">Maths starts at 11:15</p>
                     </div>
@@ -145,7 +152,9 @@ function Dashboard() {
                             pt-2
                             flex
                             flex-col
-                            gap-3
+                            2xl:gap-3
+
+                            xl:gap-0
                     
                     ">
                         <p className="
@@ -159,15 +168,18 @@ function Dashboard() {
                         </p>
                         <p className="
                         
-                            text-4xl
+                            2xl:text-4xl
                             font-bold
+
+                            xl:text-2xl
+
                         
                         ">
                             3
                         </p>
                         <p className="
-                        
-                            
+                                
+                            xl:text-[1.5vh]
                         
                         ">
                             tasks currently planned
@@ -183,7 +195,9 @@ function Dashboard() {
                             pt-2
                             flex
                             flex-col
-                            gap-3
+                            2xl:gap-3
+
+                            xl:gap-0
                     ">
                         <p className="
                         
@@ -196,13 +210,17 @@ function Dashboard() {
                         </p>
                         <p className="
                         
-                            text-4xl
+                            2xl:text-4xl
                             font-bold
-                        
+                            xl:text-2xl
                         ">
                             {revisionText}
                         </p>
-                        <p>
+                        <p className="
+                        
+                            xl:text-[1.5vh]
+                        
+                        ">
                             sessions completed this week
                         </p>
                     </div>
@@ -244,16 +262,20 @@ function Dashboard() {
                             flex
                             items-center
                             justify-center
+
+                            xl:text-[1.5vh]
                         
                         ">{today.toLocaleDateString("en-GB", { weekday: "long" })}</p>
                         </div>
                         <div className="
 
-                            mt-5
+                            2xl:mt-5
                             flex
                             flex-col
                             gap-3
                             overflow-y-scroll
+
+                            xl:mt-3
                             
                         
                         ">
@@ -270,6 +292,9 @@ function Dashboard() {
                                     pl-5
                                     gap-4
                                     shrink-0
+
+                                    
+
                                     ${lesson.active === "now"? "bg-red-100 border-red-200":""}
                                     ${lesson.active === "passed"? "bg-neutral-200 border-neutral-400":""}
                                 
@@ -315,15 +340,19 @@ function Dashboard() {
                         ">alerts</p>
                         <div className="
                         
-                            pl-10
-                            pt-5
+                            2xl:pl-10
+                            2xl:pt-5
                             mr-5
                             flex-1
                             overflow-y-scroll
                             mb-10
                             flex
                             flex-col
-                            gap-3
+                            2xl:gap-3
+
+                            xl:gap-2
+                            xl:pt-2
+                            xl:pl-5
                         
                         ">
                             {alerts? alerts.map((alert) => (

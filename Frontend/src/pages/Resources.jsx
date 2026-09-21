@@ -44,9 +44,13 @@ return(
                     flex-col
                     pt-5
                     gap-3
+                    
         
-                    h-9/10
+                    2xl:h-9/10
                     items-center
+                    xl:h-7/10
+
+                    
                 
                 ">
                     <button className="
@@ -63,19 +67,24 @@ return(
                         items-start
                         pl-5
                         hover:border-sky-200
+
+                        
                         
 
                     ">
                         <p className="
                         
-                            text-3xl
-                            pt-5
+                            2xl:text-3xl
+                            2xl:pt-5
                             font-semibold
+                            xl:text-2xl
+                            xl:pt-2
                         
                         ">Past paper</p>
                         <p className="
                         
-                            pt-5
+                            2xl:pt-5
+                            xl:pt-2
                             
                         ">Browse exam-style practice tests</p>
                     </button>
@@ -97,14 +106,17 @@ return(
                     ">
                         <p className="
                         
-                            text-3xl
-                            pt-5
+                            2xl:text-3xl
+                            2xl:pt-5
                             font-semibold
+                            xl:text-2xl
+                            xl:pt-2
                         
                         ">Past paper</p>
                         <p className="
                         
-                            pt-5
+                            2xl:pt-5
+                            xl:pt-2
                             
                         ">Browse exam-style practice tests</p>
                     </button>
@@ -126,14 +138,17 @@ return(
                     ">
                         <p className="
                         
-                            text-3xl
-                            pt-5
+                            2xl:text-3xl
+                            2xl:pt-5
                             font-semibold
+                            xl:text-2xl
+                            xl:pt-2
                         
                         ">Past paper</p>
                         <p className="
                         
-                            pt-5
+                            2xl:pt-5
+                            xl:pt-2
                             
                         ">Browse exam-style practice tests</p>
                     </button>
@@ -155,14 +170,17 @@ return(
                     ">
                         <p className="
                         
-                            text-3xl
-                            pt-5
+                            2xl:text-3xl
+                            2xl:pt-5
                             font-semibold
+                            xl:text-2xl
+                            xl:pt-2
                         
                         ">Your Notes</p>
                         <p className="
                         
-                            pt-5
+                            2xl:pt-5
+                            xl:pt-2
                             
                         ">Browse exam-style practice tests</p>
                     </Link>

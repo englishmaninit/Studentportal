@@ -43,6 +43,8 @@ function Notes(){
         
                     h-9/10
                     items-center
+
+                    
                 
                 ">
                     <div className="
@@ -56,8 +58,9 @@ function Notes(){
                         flex-3
                         flex
                         flex-col
-                        items-start
+                        items-center
                         pl-5
+                        
 
                         
 
@@ -70,14 +73,16 @@ function Notes(){
                         
                         ">Folders</p>
                         <div className="
-                        
+
                             flex
                             gap-3
                             flex-wrap
-                            pt-10
+                            2xl:pt-10
                             justify-center
                             overflow-y-scroll
                             flex-1
+                            xl:p-3
+                            
                         
                         ">
                             {folders? folders.map((folder) =>(
@@ -85,10 +90,13 @@ function Notes(){
                                 <button className="
                                 
                                     bg-blue-300
-                                    w-50
-                                    h-50
+                                    2xl:w-45
+                                    2xl:h-45
                                     rounded-xl
                                     hover:shadow-md
+
+                                    xl:w-30
+                                    xl:h-30
                                 
                                 ">
                                     <p className="
@@ -96,6 +104,8 @@ function Notes(){
                                         font-bold
                                         tracking-wider
                                         text-white
+                                        xl:font-semibold
+                                        xl:text-[2vh]
                                     
                                     ">{folder.name}</p>
                                 </button>
@@ -126,8 +136,25 @@ function Notes(){
                         pl-5
                         items-center
                         gap-5
+                        xl:mb-5
                     
                     ">
+                        <Link to={"/uploadnotes"} className="
+                        
+                            bg-sky-200
+                            rounded-xl
+                            h-15
+                            w-[25vh]
+                            font-semibold
+                            hover:shadow-md
+                            active:shadow-none
+                            flex
+                            items-center
+                            justify-center
+                            xl:h-10
+                        ">
+                            new note
+                        </Link>
                         <button className="
                         
                             bg-sky-200
@@ -137,6 +164,8 @@ function Notes(){
                             font-semibold
                             hover:shadow-md
                             active:shadow-none
+
+                            xl:h-10
                         
                         ">
                             Make Folder
@@ -153,7 +182,7 @@ function Notes(){
                             flex
                             items-center
                             justify-center
-                        
+                            xl:h-10
                         ">
                             Back
                         </Link>

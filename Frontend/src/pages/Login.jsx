@@ -93,6 +93,8 @@
 
                 <div className="
                 
+                    
+
                     w-8/10
                     bg-sky-50
                     h-[80vh]
@@ -104,19 +106,12 @@
                     shadow-lg
                     transition
                     duration-200
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
                 
                 ">
                     <div className="
                     
-<<<<<<< HEAD
                         flex-2
-=======
-
->>>>>>> origin/main
+                        
                     
                     ">
                         <p className="
@@ -129,42 +124,43 @@
                         ">Student Success HUB</p>
                         <p className="
                         
-<<<<<<< HEAD
-                            text-7xl
-=======
-                            text-8xl
->>>>>>> origin/main
+                            2xl:text-7xl
                             font-semibold
-                            w-1/2
+                            2xl:w-1/2
                             pt-5
+
+                            xl:text-5xl
+                            xl:w-2/3
                         
                         ">The Ultimate Student Portal</p>
                         <p className="
                         
                             text-neutral-500
-                            text-2xl
+                            2xl:text-2xl
                             pr-10
                             mt-5
                             pt-3
+
+                            xl:text-[2.5vh]
                         
                         ">Organise homework, build revision routines, explore resources, and get AI-supported practice from one modern student dashboard.</p>
                         <div className="
                         
                             flex
                             flex-row   
-<<<<<<< HEAD
-                            w-2/3
-=======
-                            w-1/2
->>>>>>> origin/main
+                            2xl:w-2/3
                             gap-3
                             mt-10
-                            pl-5
+                            2xl:pl-5
                             h-10
-                        
+                            
+                            xl:w-9/10
+                            xl:pl-0
+
                         ">
                             <p className="
-                            
+
+                                2xl:text
                                 bg-white
                                 flex-1
                                 rounded-2xl
@@ -172,17 +168,20 @@
                                 flex
                                 items-center
                                 justify-center
+                                xl:text-[2vh]
                             
                             ">Secure login</p>
                             <p className="
                             
                                 bg-white
+                                2xl:text
                                 flex-1
                                 rounded-2xl
                                 text-center
                                 flex
                                 items-center
                                 justify-center
+                                xl:text-[2vh]
                             
                             ">Homework planner</p>
                             <p className="
@@ -192,21 +191,23 @@
                                 rounded-2xl
                                 text-center
                                 flex
+                                2xl:text
                                 items-center
                                 justify-center
+                                xl:text-[2vh]
                             
                             ">AI revision support</p>
                         </div>
                     </div>
                     <div className="
                     
-<<<<<<< HEAD
                         flex-1
-=======
-                        w-1/2
->>>>>>> origin/main
-                        p-10
-                    
+                        2xl:p-10
+                        shrink-0
+
+                        xl:p-0
+
+
                     ">
                         <div>
                             <p className="
@@ -263,11 +264,15 @@
                             ${activePage === "login"? "": "hidden"}
                             mt-7
                             
-<<<<<<< HEAD
+                            2xl:overflow-y-visible
+                            
+
+                            xl:overflow-y-scroll
+                            xl:h-3/4
+                            xl:pb-5
+                            xl:pr-5
                             
                             
-=======
->>>>>>> origin/main
                         `}>
                             <p className="
                             
@@ -357,13 +362,10 @@
                             
                             ${activePage === "register"? "": "hidden"}
                             mt-7
-<<<<<<< HEAD
                             overflow-y-scroll
                             h-3/4
                             pb-5
                             pr-5
-=======
->>>>>>> origin/main
 
                         `}>
                             <p className="

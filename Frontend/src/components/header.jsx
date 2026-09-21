@@ -6,19 +6,19 @@ function Header({active}){
     return(
 
             <div className="
-                    
-                    w-1/10
-                    bg-sky-50
-                    h-[100vh]
-                    rounded-2xl
-                    flex
-                    flex-col
-
-                    p-2
-                    shadow-lg
-                    transition
-                    duration-200
-                    pb-5    
+                                
+                w-1/10
+                bg-sky-50
+                h-screen
+                overflow-hidden
+                rounded-2xl
+                flex
+                flex-col
+                p-2
+                shadow-lg
+                transition
+                duration-200
+                pb-5
 
                 
                 ">
@@ -28,6 +28,9 @@ function Header({active}){
                         text-2xl
                         pt-5
 
+                        xl:text-[2.5vh]
+                        xl:pt-2
+
                     ">The Ultimate Student Portal</p>
                     <div className="
 
@@ -36,6 +39,9 @@ function Header({active}){
                         mt-10   
                         gap-5
                         flex-3
+
+                        xl:gap-3
+                        xl:mt-5
                     
                     ">
                         <Link to={"/dashboard"} className={`
@@ -50,6 +56,8 @@ function Header({active}){
 
                             hover:bg-sky-100
 
+                            xl:h-10
+
                             ${active === "Dashboard"? "bg-sky-100 border-l border-l-4 border-amber-600": ""}
                         
                         `}>Dashboard</Link>
@@ -62,6 +70,8 @@ function Header({active}){
                             h-15
                             items-center
                             text-[1.5vh]
+
+                            xl:h-10
 
                             hover:bg-sky-100
 
@@ -78,6 +88,8 @@ function Header({active}){
                             items-center
                             text-[1.5vh]
 
+                            xl:h-10
+
                             hover:bg-sky-100
 
                             ${active === "AI Practice"? "bg-sky-100 border-l border-l-4 border-amber-600": ""}
@@ -92,6 +104,8 @@ function Header({active}){
                             h-15
                             items-center
                             text-[1.5vh]
+
+                            xl:h-10
 
                             hover:bg-sky-100
 
@@ -108,6 +122,8 @@ function Header({active}){
                             items-center
                             text-[1.5vh]
 
+                            xl:h-10
+
                             hover:bg-sky-100
 
                             ${active === "Timetable"? "bg-sky-100 border-l border-l-4 border-amber-600": ""}
@@ -122,6 +138,8 @@ function Header({active}){
                             h-15
                             items-center
                             text-[1.5vh]
+
+                            xl:h-10
 
                             hover:bg-sky-100
 
@@ -144,6 +162,8 @@ function Header({active}){
                         bg-white
                         p-3
                         flex-1
+
+                        xl:p-1
                     
                     ">
                         <p className="
@@ -151,6 +171,8 @@ function Header({active}){
                             
                             tracking-wider
                             text-[1.5vh]
+
+                            
                         
                         ">Profile</p>
                         <p className="
@@ -159,7 +181,12 @@ function Header({active}){
                             text-[1.5vh]
                         
                         ">Student Name</p>
-                        <p>Year 11 |GCSE pathway </p>
+                        <p className="
+                        
+                            xl:text-[1.5vh]
+                            xl:font-semibold
+                        
+                        ">Year 11 |GCSE pathway </p>
                         <button className="
                         
                             border-t
@@ -167,7 +194,9 @@ function Header({active}){
                             border-neutral-400
                             mt-3
                             pt-2
-                        
+                            
+                            xl:text-[1.5vh]
+
                         ">Settings</button>
                     </div>
                     
