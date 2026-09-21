@@ -1,225 +1,174 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";;
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../components/header";
 
 function Resources(){
 
 
 const navigate = useNavigate();
-const [active, setActive] = useState("resources");
+
 
 
 return(
 
         <div className="bg-gradient-to-r from-sky-100 to bg-sky-50  w-screen min-h-screen   flex  flex-row bg-neutral-100 ">
 
+            <Header active={"Resources"}/>
             <div className="
-                    
-                    w-1/10
-                    bg-sky-50
-                    h-[100vh]
-                    rounded-2xl
+            
+          
+                flex-1
+                ml-20
+                mr-20
+                mt-10
+                mb-20
+                bg-white
+                rounded-xl
+                shadow-lg
+                flex
+                flex-col
+                
+
+            ">
+                <p className="
+                
+                    text-3xl
+                    pt-5
+                    pl-10
+                    font-semibold
+                
+                ">Study Resources</p>
+                <div className="
+                
                     flex
                     flex-col
-
-                    p-2
-                    shadow-lg
-                    transition
-                    duration-200
-
-                    pb-5    
+                    pt-5
+                    gap-3
+        
+                    h-9/10
+                    items-center
                 
                 ">
-                    <p className="
+                    <button className="
                     
-                        font-bold
-                        text-2xl
-                        pt-5
-
-                    ">The Ultimate Student Portal</p>
-                    <div className="
-
+                        bg-sky-50
+                        w-9/10
+                        rounded-xl
+                        shadow-md
+                        border-2
+                        border-sky-100
+                        flex-1
                         flex
                         flex-col
-                        mt-10   
-                        gap-5
-                        flex-3
-                    
-                    ">
-                        <button className={`
+                        items-start
+                        pl-5
+                        hover:border-sky-200
                         
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
 
-                            ${active === "dashboard"? "bg-sky-100 border-l border-l-4 border-amber-600": ""}
-                        
-                        `}>Dashboard</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Homework</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">AI Practice</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Reasources</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">TimeTable</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Revision</button>
-                    </div>
-                    <div className="
-                    
-                        flex-3
-                    
                     ">
+                        <p className="
                         
-                    </div>
-                    <div className="
+                            text-3xl
+                            pt-5
+                            font-semibold
+                        
+                        ">Past paper</p>
+                        <p className="
+                        
+                            pt-5
+                            
+                        ">Browse exam-style practice tests</p>
+                    </button>
+                    <button className="
                     
-                        shadow-md
+                        bg-sky-50
+                        w-9/10
                         rounded-xl
-                        h-37
-                        bg-white
-                        p-3
+                        shadow-md
+                        border-2
+                        border-sky-100
                         flex-1
+                        flex
+                        flex-col
+                        items-start
+                        pl-5
+                        hover:border-sky-200
                     
                     ">
                         <p className="
                         
-                            
-                            tracking-wider
-                            text-[1.5vh]
+                            text-3xl
+                            pt-5
+                            font-semibold
                         
-                        ">Profile</p>
+                        ">Past paper</p>
                         <p className="
                         
-                            font-semibold
-                            text-[1.5vh]
-                        
-                        ">Student Name</p>
-                        <p>Year 11 |GCSE pathway </p>
-                        <button className="
-                        
-                            border-t
-                            w-10/10
-                            border-neutral-400
-                            mt-3
-                            pt-2
-                        
-                        ">Settings</button>
-                        <div className="
-                        w-full max-w-4xl
-                         bg-sky-50/50 p-8 
-                         rounded-3xl border
-                          border-sky-100 
-                          font-sans">
+                            pt-5
                             
-                        </div>
-                    <div className="flex-1 p-8">
-                <div className="
-                    w-full max-w-4xl
-                    bg-sky-50/50 p-8 
-                    rounded-3xl border
-                    border-sky-100 
-                    font-sans
-                ">
-                    <div className="
-                        flex items-center
-                        justify-between mb-6
+                        ">Browse exam-style practice tests</p>
+                    </button>
+                    <button className="
+                    
+                        bg-sky-50
+                        w-9/10
+                        rounded-xl
+                        shadow-md
+                        border-2
+                        border-sky-100
+                        flex-1
+                        flex
+                        flex-col
+                        items-start
+                        pl-5
+                        hover:border-sky-200
+                    
                     ">
-                        <h2 className="
-                            text-2xl font-bold
-                            text-slate-900 
-                            tracking-tight
-                        ">
-                            Study resources
-                        </h2>
-                        <span className="text-sm text-slate-700 bg-white/80 px-4 py-2 rounded-full border border-sky-100/80 shadow-sm font-medium">
-                            Quick access
-                        </span>
-                    </div>
-
-                    <div className=" flex flex-col gap-4">
-                        <div className="bg-[#e7f0fd]/70 hover:bg-[#deebfd] transition-colors p-6 rounded-2xl border border-sky-200/50 cursor-pointer">
-                            <h3 className="text-lg font-bold text-slate-900 mb-1">
-                                Past papers
-                            </h3>
-                            <p className="text-slate-500 text-base">
-                                Browse exam-style practice sets
-                            </p>
-                        </div>
-
-                        <div className="bg-[#e7f0fd]/70 hover:bg-[#deebfd] transition-colors p-6 rounded-2xl border border-sky-200/50 cursor-pointer">
-                            <h3 className="text-lg font-bold text-slate-900 mb-1">
-                                Mark schemes
-                            </h3>
-                            <p className="text-slate-500 text-base">
-                                Check methods and common mistakes
-                            </p>
-                        </div>
-
-                        <div className="bg-[#e7f0fd]/70 hover:bg-[#deebfd] transition-colors p-6 rounded-2xl border border-sky-200/50 cursor-pointer">
-                            <h3 className="text-lg font-bold text-slate-900 mb-1">
-                                Revision videos
-                            </h3>
-                            <p className="text-slate-500 text-base">
-                                Watch short topic explainers
-                            </p>
-                        </div>
-                    </div>
+                        <p className="
+                        
+                            text-3xl
+                            pt-5
+                            font-semibold
+                        
+                        ">Past paper</p>
+                        <p className="
+                        
+                            pt-5
+                            
+                        ">Browse exam-style practice tests</p>
+                    </button>
+                    <Link to={"/notes"} className="
+                    
+                        bg-sky-50
+                        w-9/10
+                        rounded-xl
+                        shadow-md
+                        border-2
+                        border-sky-100
+                        flex-1
+                        flex
+                        flex-col
+                        items-start
+                        pl-5
+                        hover:border-sky-200
+                    
+                    ">
+                        <p className="
+                        
+                            text-3xl
+                            pt-5
+                            font-semibold
+                        
+                        ">Your Notes</p>
+                        <p className="
+                        
+                            pt-5
+                            
+                        ">Browse exam-style practice tests</p>
+                    </Link>
                 </div>
             </div>
-
         </div>
-              </div>
-              </div>
 
     );
 }

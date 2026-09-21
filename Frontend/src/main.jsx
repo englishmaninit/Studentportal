@@ -10,6 +10,8 @@ import Resources from './pages/Resources.jsx'
 import Revision from './pages/Revision.jsx'
 import Settings from './pages/Settings.jsx'
 import Timetable from './pages/Timetable.jsx'
+import Notes from './pages/notes.jsx'
+import UploadNotes from './pages/uploadNotes.jsx'
 
 const router=createBrowserRouter([
   {path:"/", element:<Login/>},
@@ -19,7 +21,9 @@ const router=createBrowserRouter([
   {path:"/resources",element: <Resources/>},
   {path:"/revision",element: <Revision/>},
   {path:"/settings",element: <Settings/>},
-  {path:"/timetable",element: <Timetable/>}
+  {path:"/timetable",element: <Timetable/>},
+  {path:"/notes", element: <Notes/>},
+  {path:"/uploadNotes", element: <UploadNotes/>}
 ])
 createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />

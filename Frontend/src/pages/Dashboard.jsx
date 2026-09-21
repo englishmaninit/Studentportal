@@ -1,185 +1,71 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/header";
 
 function Dashboard() {
 
+    const today = new Date()
     const [active, setActive] = useState("dashboard")
     const navigate = useNavigate();
+    const [revisionText, setRevisionText] = useState("")
+    const [revisionArray, setRevisionArray] = useState([{subject:"", status:"completed"},{subject:"", status:"completed"},{subject:"", status:"none"}])
+    const [timeTableArray, setTimeTableArray] = useState([{time:"09:00", subject:"english", active:"passed"}, {time:"11:15", subject:"Maths", active:"passed"}, {time:"13:20", subject:"Science", active:"passed"}, {time:"09:00", subject:"english",active:"now"}, {time:"11:15", subject:"Maths",active:"upcomming"}, {time:"13:20", subject:"Science", active:"upcomming"}])
+    const [alerts, setAlerts] = useState([{subject:"english", summary:"assesment due soon"},{subject:"maths", summary:"exam soon"}, {subject:"IT", summary:"Presentation soon"}])
 
     const handleNavigation = (tabKey, path) => {
         setActive(tabKey);
         navigate(path);
     };
 
+    useEffect(()=>{
+
+        let finish = 0;
+        for(let i = 0; i < revisionArray.length; i++){
+
+            if(revisionArray[i].status === "completed"){
+
+                finish = finish + 1;
+
+            }
+
+        }   
+
+        setRevisionText(`${finish}/${revisionArray.length}`)
+
+    }, [])
 
     return (
 
         <div className="bg-gradient-to-r from-sky-100 to bg-sky-50  w-screen min-h-screen   flex  flex-row bg-neutral-100 ">
 
-            <div className="
-                    
-                    w-1/10
-                    bg-sky-50
-                    h-[100vh]
-                    rounded-2xl
-                    flex
-                    flex-col
-
-                    p-2
-                    shadow-lg
-                    transition
-                    duration-200
-
-                    pb-5    
-                
-                ">
-                    <p className="
-                    
-                        font-bold
-                        text-2xl
-                        pt-5
-
-                    ">The Ultimate Student Portal</p>
-                    <div className="
-
-                        flex
-                        flex-col
-                        mt-10   
-                        gap-5
-                        flex-3
-                    
-                    ">
-                        <button className={`
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-
-                            ${active === "dashboard"? "bg-sky-100 border-l border-l-4 border-amber-600": ""}
-                        
-                        `}>Dashboard</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Homework</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">AI Practice</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Resources</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Timetable</button>
-                        <button className="
-                        
-                            flex
-                            justify-start
-                            pl-5
-                            font-semibold
-                            h-15
-                            items-center
-                            text-[1.5vh]
-                        
-                        ">Revision</button>
-                    </div>
-                    <div className="
-                    
-                        flex-3
-                    
-                    ">
-                        
-                    </div>
-                    <div className="
-                    
-                        shadow-md
-                        rounded-xl
-                        h-37
-                        bg-white
-                        p-3
-                        flex-1
-                    
-                    ">
-                        <p className="
-                        
-                            
-                            tracking-wider
-                            text-[1.5vh]
-                        
-                        ">Profile</p>
-                        <p className="
-                        
-                            font-semibold
-                            text-[1.5vh]
-                        
-                        ">Student Name</p>
-                        <p>Year 11 |GCSE pathway </p>
-                        <button className="
-                        
-                            border-t
-                            w-10/10
-                            border-neutral-400
-                            mt-3
-                            pt-2
-                        
-                        ">Settings</button>
-                    </div>
-                    
-            </div>
+            <Header active={"Dashboard"}/>
             <div className="
         
-                outline
                 w-[130vh]
                 h-[90vh]
                 ml-50
                 mt-10          
                 flex
                 flex-col          
+                
             
             ">
                 <div className="
                 
-                            flex
-                            flex-row
-                            justify-between
+                        flex
+                        flex-row
+                        justify-between
+                        items-center
+                        
                             
                 ">
-                    <div>
+                    <div className="
+                    
+                            flex
+                            flex-col
+                            gap-3
+                    
+                    ">
                             <p className="
                             
                                 text-blue-400
@@ -192,13 +78,13 @@ function Dashboard() {
                                 text-2xl
                                 font-bold
                                 tracking-wider
-                                pt-5
+                       
                             
                             
                             ">Welcome back, Demo</p>
                             <p className="
 
-                                pt-5
+                        
                                 text-neutral-500
 
                             
@@ -212,7 +98,7 @@ function Dashboard() {
                             rounded-2xl
                             flex
                             p-2
-                            flex
+                           
                             flex-col
                     
                     ">
@@ -229,62 +115,263 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="
-                
-                            outline
-                            h-[70vh]
-                            grid-rows-3
-                            grid-flow-3
+                    
+                    mt-5
+                    flex-1
+                    min-h-0
+                    grid
+                    grid-cols-4
+                    grid-rows-[repeat(5,minmax(0,1fr))]
+                    gap-3
                 
                 ">
-                    <div>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            col-span-2
+                    
+                    ">
                         <p>Demo Student</p>
                     </div>
-                    <div>
-                        <p>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            col-span-1
+                            pl-5
+                            pt-2
+                            flex
+                            flex-col
+                            gap-3
+                    
+                    ">
+                        <p className="
+                        
+                            font-semibold
+                            text-red-600
+                            
+                        
+                        ">
                             Homework
                         </p>
-                        <p>
+                        <p className="
+                        
+                            text-4xl
+                            font-bold
+                        
+                        ">
                             3
                         </p>
-                        <p>
+                        <p className="
+                        
+                            
+                        
+                        ">
                             tasks currently planned
                         </p>
                     </div>
-                    <div>
-                        <p>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            col-span-1
+                            pl-5
+                            pt-2
+                            flex
+                            flex-col
+                            gap-3
+                    ">
+                        <p className="
+                        
+                            font-semibold
+                            text-red-600
+                            
+                        
+                        ">
                             Revision
                         </p>
-                        <p>
-                            4/5
+                        <p className="
+                        
+                            text-4xl
+                            font-bold
+                        
+                        ">
+                            {revisionText}
                         </p>
                         <p>
                             sessions completed this week
                         </p>
                     </div>
-                    <div>
-                        <p>Today's timetable</p>
-                        <div>
-                            <div>
-                                <p>09:00</p>
-                                <p>English</p>
-                            </div>
-                            <div>
-                                <p>09:00</p>
-                                <p>English</p>
-                            </div>
-                            <div>
-                                <p>09:00</p>
-                                <p>English</p>
-                            </div>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            row-span-2
+                            col-span-3
+                            p-5
+                            flex
+                            flex-col
+                    
+                    ">
+                        <div className="
+                        
+                            flex
+                            flex-row
+                            justify-between
+                            pr-5
+                            
+                        
+                        ">
+                        <p className="
+                        
+                            font-semibold
+                            text-[1.8vh]
+
+                        
+                        ">Today's timetable</p>
+                        <p className="
+                        
+                            border-2
+                            
+                            rounded-xl
+                            w-[10vh]
+                            border-neutral-200
+                            flex
+                            items-center
+                            justify-center
+                        
+                        ">{today.toLocaleDateString("en-GB", { weekday: "long" })}</p>
+                        </div>
+                        <div className="
+
+                            mt-5
+                            flex
+                            flex-col
+                            gap-3
+                            overflow-y-scroll
+                            
+                        
+                        ">
+                            {timeTableArray? timeTableArray.map((lesson) => (
+
+                                <div className={`
+                                
+                                    border-2
+                                    border-neutral-200
+                                    rounded-xl
+                                    flex
+                                    h-15
+                                    items-center
+                                    pl-5
+                                    gap-4
+                                    shrink-0
+                                    ${lesson.active === "now"? "bg-red-100 border-red-200":""}
+                                    ${lesson.active === "passed"? "bg-neutral-200 border-neutral-400":""}
+                                
+                                `}>
+                                    <p className={`
+                                    
+                                        font-semibold
+                                        ${lesson.active === "passed"? "text-neutral-500":"text-blue-400"}
+                                        
+                                    
+                                    `}>{lesson.time}</p>
+                                    <p className="
+                                    
+                                        font-semibold
+                                    
+                                    ">{lesson.subject}</p>
+                                </div>
+
+
+                            )): ""}
+
                         </div>
                     </div>
-                    <div>
-                        <p>alerts</p>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            row-span-2
+                            col-span-1
+                            flex
+                            flex-col
+                    
+                    ">
+                        <p className="
+                        
+                            text-[2vh]
+                            
+                            font-semibold
+                            pl-5
+                            pt-2
+                        
+                        ">alerts</p>
+                        <div className="
+                        
+                            pl-10
+                            pt-5
+                            mr-5
+                            flex-1
+                            overflow-y-scroll
+                            mb-10
+                            flex
+                            flex-col
+                            gap-3
+                        
+                        ">
+                            {alerts? alerts.map((alert) => (
+
+                                <div className="
+                                
+                                    border-2
+                                    rounded-xl
+                                    border-neutral-200
+                                    pl-2
+
+                                ">
+                                    <p className="
+                                    
+                                        font-semibold
+                                    
+                                    ">{alert.subject}</p>
+                                    <p className="
+                                    
+                                        text-neutral-600
+                                        pl-2
+                                    
+                                    ">{alert.summary}</p>
+                                </div>
+
+                            )): ""}
+                        </div>
                     </div>
-                    <div>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            row-span-1
+                            col-span-3
+                    
+                    ">
                         <p>notes</p>
                     </div>
-                    <div>
+                    <div className="
+                    
+                            bg-white
+                            shadow-md
+                            rounded-xl
+                            row-span-1
+                            col-span-1
+                    
+                    ">
                         <p>progress</p>
                     </div>
                 </div>
