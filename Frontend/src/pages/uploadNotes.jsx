@@ -6,6 +6,8 @@ function UploadNotes() {
     const [image, setImage] = useState();
     const [errorMessage, setErrorMessage] = useState("");
     const [saving, setSaving] = useState(false)
+    const title = useRef("")
+    const desc = useRef("")
 
     function uploadImage(image) {
 
@@ -25,36 +27,58 @@ function UploadNotes() {
 
     }
 
-    function saveNote(){
+    function saveNote() {
 
-        if(image !== "" || image != null){
+        if (!image) {
+            setErrorMessage("Please select an image");
+            return;
+        }
 
-            fetch("http://localhost:8080/upload-image",{
+        setSaving(true);
 
-                method:"POST",
-                headers:{
+        const reader = new FileReader();
 
+        reader.onloadend = () => {
+
+            const base64Image = reader.result.split(",")[1];
+
+            fetch("http://localhost:8080/upload-image", {
+
+                method: "POST",
+
+                headers: {
                     "Content-Type": "application/json"
-
                 },
-                body:JSON.stringify({
 
-                    userID: currentUserID,
-                    subjectID: subjectID,
-                    noteTitle: noteTitle,
-                    description: description,
+                body: JSON.stringify({
+
+                    userID: 4,
+                    subjectID: 1,
+                    noteTitle: title.current.value,
+                    description: desc.current.value,
                     image: base64Image
 
                 })
 
-            }).then(response => response.text()).then(data =>{
+            })
+            .then(response => response.text())
+            .then(data => {
 
-                console.log(data)
+                console.log(data);
+                setSaving(false);
 
             })
+            .catch(error => {
 
-        }
+                console.error(error);
+                setErrorMessage("Failed to upload image");
+                setSaving(false);
 
+            });
+
+        };
+
+        reader.readAsDataURL(image);
     }
 
     return (
@@ -116,63 +140,128 @@ function UploadNotes() {
                                 self-start
                             
                             ">Notes</p>
-                        <label className=" 
-                                flex flex-col 
-                                items-center 
-                                justify-center 
-                                w-7/10 
-                                h-8/10 
-                                mt-5 
-                                border-2 
-                                rounded-md 
-                                border-neutral-300 
-                                hover:border-neutral-500
-                                cursor-pointer 
-                                text-neutral-600 
-                                hover:text-black 
-                                active:text-neutral-600 
-            
-                            "
-                        >
-                            <div className={` 
-                            
-                                flex 
-                                flex-col 
-                                items-center 
-                                ${image === null ? "" : "hidden"} 
+                        <div className="
+                        
+                            w-9/10
+                            h-9/10
+                            flex
+                            flex-col
+                            items-center
+                        
+                        ">
+                            <label className=" 
+                                    flex flex-col 
+                                    items-center 
+                                    justify-center 
+                                    w-7/10 
+                                    h-8/10 
+                                    mt-5 
+                                    border-2 
+                                    rounded-md 
+                                    border-neutral-300 
+                                    hover:border-neutral-500
+                                    cursor-pointer 
+                                    text-neutral-600 
+                                    hover:text-black 
+                                    active:text-neutral-600 
+                
+                                "
+                            >
+                                <div className={` 
                                 
-                            
-                            `}>
-                                <div>
-                                    <p>upload image</p>
+                                    flex 
+                                    flex-col 
+                                    items-center 
+                                    ${image === null ? "" : "hidden"} 
+                                    
+                                
+                                `}>
+                                    <div>
+                                        <p>upload image</p>
+                                    </div>
+
+                                    <p className="mt-2 text-gray-600">
+                                        Click to upload an image
+                                    </p>
+                                </div>
+                                <div className={` 
+                                
+                                    w-[80vh] 
+                                    h-[40vh] 
+                                    p-30 
+                                    flex 
+                                    justify-center 
+                                    items-center 
+                                    flex-col 
+                                    ${image === null ? "hidden" : ""} 
+                                
+                                `}>
+                                    <img src={image ? URL.createObjectURL(image) : ""} className=" 
+                                    
+                                        h-[30vh] 
+                                    
+                                    "/>
+                                    <p>Click to change image</p>
                                 </div>
 
-                                <p className="mt-2 text-gray-600">
-                                    Click to upload an image
-                                </p>
-                            </div>
-                            <div className={` 
-                            
-                                w-[80vh] 
-                                h-[40vh] 
-                                p-30 
-                                flex 
-                                justify-center 
-                                items-center 
-                                flex-col 
-                                ${image === null ? "hidden" : ""} 
-                            
-                            `}>
-                                <img src={image ? URL.createObjectURL(image) : ""} className=" 
-                                
-                                    h-[30vh] 
-                                
-                                "/>
-                                <p>Click to change image</p>
-                            </div>
+                                <input disabled={saving} onChange={(e) => uploadImage(e.target.files[0])} type="file" accept="image/*" className="hidden" />
+                            </label>
 
-                            <input disabled={saving} onChange={(e) => uploadImage(e.target.files[0])} type="file" accept="image/*" className="hidden" />
-                        </label>
+                            <div className="
+                            
+                                flex
+                                flex-row
+                                gap-4
+                            
+                            ">
+                                <div className="
+                                
+                                    font-semibold
+                                
+                                ">
+                                    
+                            
+                                    <input ref={title} placeholder="Title" type="text" className="
+                                        
+                                            bg-white
+                                            w-[35vh]
+                                            h-10
+                                            rounded-2xl
+                                            pl-3
+                                            font-semibold
+                                            gray-300
+                                            mt-3
+                                            hover:shadow-md
+                                            focus:outline-none
+                                            focus:border-none
+
+                                        "/>  
+                                </div>
+                                <div className="
+                                
+                                    font-semibold
+                                
+                                ">
+                                    
+                            
+                                    <input ref={desc} placeholder="description" type="text" className="
+                                        
+                                            bg-white
+                                            w-[35vh]
+                                            h-10
+                                            rounded-2xl
+                                            pl-3
+                                            font-semibold
+                                            gray-300
+                                            mt-3
+                                            hover:shadow-md
+                                            focus:outline-none
+                                            focus:border-none
+
+                                        "/>  
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 

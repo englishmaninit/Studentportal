@@ -49,11 +49,13 @@ public class Images {
 
             PreparedStatement images = connection.prepareStatement(imageInsert);
 
+            String filePath = path.toString();
+
             images.setLong(1, currentUserID);
             images.setLong(2, subjectID);
             images.setString(3, noteTitle);
             images.setString(4, description);
-            images.setString(5, fileName);
+            images.setString(5, filePath);
             images.setString(6, "Image");
             images.setTimestamp(7, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
             images.setTimestamp(8, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
