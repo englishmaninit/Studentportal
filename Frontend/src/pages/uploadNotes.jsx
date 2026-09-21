@@ -1,23 +1,23 @@
 import Header from "../components/header"
 import { useRef, useState } from "react";
 
-function UploadNotes(){
+function UploadNotes() {
 
     const [image, setImage] = useState();
     const [errorMessage, setErrorMessage] = useState("");
     const [saving, setSaving] = useState(false)
 
-    function uploadImage(image){
+    function uploadImage(image) {
 
         setErrorMessage("")
 
-        if (!image || !image.type.startsWith("image/")){
+        if (!image || !image.type.startsWith("image/")) {
 
             setImage(null)
             setErrorMessage("not valid file type")
 
         }
-        else{
+        else {
 
             setImage(image)
 
@@ -25,10 +25,10 @@ function UploadNotes(){
 
     }
 
-        return(
-            <div className="bg-gradient-to-r from-sky-100 to bg-sky-50  w-screen min-h-screen   flex  flex-row bg-neutral-100">
-                <Header active={"Resources"}/>
-                <div className=" 
+    return (
+        <div className="bg-gradient-to-r from-sky-100 to bg-sky-50  w-screen min-h-screen   flex  flex-row bg-neutral-100">
+            <Header active={"Resources"} />
+            <div className=" 
                 
                     flex-1 
                     ml-20 
@@ -42,7 +42,7 @@ function UploadNotes(){
                     flex-col 
                     
                 ">
-                    <p className=" 
+                <p className=" 
                     
                         text-3xl 
                         pt-5 
@@ -50,7 +50,7 @@ function UploadNotes(){
                         font-semibold 
                     
                     ">Study Resources</p>
-                    <div className=" 
+                <div className=" 
                     
                         flex 
                         flex-col 
@@ -61,7 +61,7 @@ function UploadNotes(){
                         items-center 
                     
                     ">
-                        <div className=" 
+                    <div className=" 
                         
                             bg-sky-50 
                             w-9/10 
@@ -76,7 +76,7 @@ function UploadNotes(){
                             pl-5 
                             
                         ">
-                            <p className=" 
+                        <p className=" 
                             
                                 pt-5 
                                 text-[2vh] 
@@ -84,7 +84,7 @@ function UploadNotes(){
                                 self-start
                             
                             ">Notes</p>
-                            <label className=" 
+                        <label className=" 
                                 flex flex-col 
                                 items-center 
                                 justify-center 
@@ -100,18 +100,18 @@ function UploadNotes(){
                                 hover:text-black 
                                 active:text-neutral-600 
             
-                            " 
-                            >
+                            "
+                        >
                             <div className={` 
                             
                                 flex 
                                 flex-col 
                                 items-center 
-                                ${image === null ? "": "hidden"} 
+                                ${image === null ? "" : "hidden"} 
                                 
                             
                             `}>
-                                <div> 
+                                <div>
                                     <p>upload image</p>
                                 </div>
 
@@ -139,12 +139,12 @@ function UploadNotes(){
                                 <p>Click to change image</p>
                             </div>
 
-                            <input disabled={saving} onChange={(e) => uploadImage(e.target.files[0])} type="file" accept="image/*" className="hidden"/>
-                            </label>
+                            <input disabled={saving} onChange={(e) => uploadImage(e.target.files[0])} type="file" accept="image/*" className="hidden" />
+                        </label>
 
-                        </div>
+                    </div>
 
-                        <div className=" 
+                    <div className=" 
                         
                             bg-sky-50 
                             w-9/10 
@@ -161,7 +161,7 @@ function UploadNotes(){
                             gap-5 
                         
                         ">
-                            <button className=" 
+                        <button className=" 
                             
                                 bg-sky-200 
                                 rounded-xl 
@@ -172,9 +172,9 @@ function UploadNotes(){
                                 active:shadow-none 
                             
                             ">
-                                Upload
-                            </button>
-                            <button className=" 
+                            Upload
+                        </button>
+                        <button className=" 
                             
                                 bg-sky-200 
                                 rounded-xl 
@@ -185,13 +185,13 @@ function UploadNotes(){
                                 active:shadow-none 
                             
                             ">
-                                Back
-                            </button>
-                        </div>
+                            Back
+                        </button>
                     </div>
                 </div>
             </div>
-        )
+        </div>
+    )
 
 }
 

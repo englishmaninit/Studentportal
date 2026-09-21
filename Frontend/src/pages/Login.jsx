@@ -104,12 +104,19 @@
                     shadow-lg
                     transition
                     duration-200
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
                 
                 ">
                     <div className="
                     
+<<<<<<< HEAD
                         flex-2
+=======
+
+>>>>>>> origin/main
                     
                     ">
                         <p className="
@@ -122,7 +129,11 @@
                         ">Student Success HUB</p>
                         <p className="
                         
+<<<<<<< HEAD
                             text-7xl
+=======
+                            text-8xl
+>>>>>>> origin/main
                             font-semibold
                             w-1/2
                             pt-5
@@ -141,7 +152,11 @@
                         
                             flex
                             flex-row   
+<<<<<<< HEAD
                             w-2/3
+=======
+                            w-1/2
+>>>>>>> origin/main
                             gap-3
                             mt-10
                             pl-5
@@ -185,7 +200,11 @@
                     </div>
                     <div className="
                     
+<<<<<<< HEAD
                         flex-1
+=======
+                        w-1/2
+>>>>>>> origin/main
                         p-10
                     
                     ">
@@ -244,8 +263,11 @@
                             ${activePage === "login"? "": "hidden"}
                             mt-7
                             
+<<<<<<< HEAD
                             
                             
+=======
+>>>>>>> origin/main
                         `}>
                             <p className="
                             
@@ -335,10 +357,13 @@
                             
                             ${activePage === "register"? "": "hidden"}
                             mt-7
+<<<<<<< HEAD
                             overflow-y-scroll
                             h-3/4
                             pb-5
                             pr-5
+=======
+>>>>>>> origin/main
 
                         `}>
                             <p className="
