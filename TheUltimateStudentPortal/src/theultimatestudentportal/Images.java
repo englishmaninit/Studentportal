@@ -28,7 +28,7 @@ public class Images {
 
             Connection connection = DatabaseConnection.connect();
 
-            path = Paths.get("C:\\StudentPortal\\Storage\\Notes\\" + fileName);
+            path = Paths.get("C:\\Users\\jorda\\OneDrive\\Documents\\6th Form\\NEA\\Main project\\Storage\\Notes\\" + fileName);
 
             boolean fileExists = Files.exists(path);
 
@@ -38,14 +38,14 @@ public class Images {
 
                 fileName = noteTitle + random.nextInt(10000) + ".jpg";
 
-                path = Paths.get("C:\\StudentPortal\\Storage\\Notes\\" + fileName);
+                path = Paths.get("C:\\Users\\jorda\\OneDrive\\Documents\\6th Form\\NEA\\Main project\\Storage\\Notes\\" + fileName);
             }
 
             Files.createDirectories(path.getParent());
 
             Files.write(path, imageData);
 
-            String imageInsert = "INSERT INTO studentnotes(studentid , subjectid ,notetitle, notecontent,imagelocation,typeofnote,datecreated, dateupdated)" + "VALUES(?,?,?,?,?,?,?,?,?)";
+            String imageInsert = "INSERT INTO studentnotes(studentid , subjectid ,notetitle, notecontent,imagelocation,typeofnote,datecreated, dateupdated)" + "VALUES(?,?,?,?,?,?,?,?)";
 
             PreparedStatement images = connection.prepareStatement(imageInsert);
 
